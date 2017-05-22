@@ -52,6 +52,7 @@ function Monter(image, top, left, size){
     this.top = top;
     this.left = left;
     this.size = size;
+    this.speed = 5;
 
 
     this.getMonterElement= function(){
@@ -61,13 +62,21 @@ function Monter(image, top, left, size){
             ' style="top: '+this.top+'px; left:'+this.left+'px;position:absolute;" />';
     }
 
-    this.moveRight = function(){
-        this.left += 20;
-        console.log(this.top +'ok: ' + this.left);
+    this.moveRight = function () {
+        var sum = this.left + this.speed;
+        if(sum >= 0 && sum < 1800){
+            this.left = sum;
+            return true;
+        }
+        return false;
     }
-    this.moveleft = function(){
-        this.left -= 20;
-        console.log(this.top +'ok: ' + this.left);
+    this.moveLeft = function () {
+        var sum = this.left - this.speed;
+        if (sum>0 && sum < 1800){
+            this.left = sum;
+            return true;
+        }
+        return false;
     }
 
 }
@@ -75,21 +84,19 @@ function Monter(image, top, left, size){
 var monter = new Monter('Anh/MonsterShooter2-icon.png', 600, 0, 200);
 
 function start(){
-    if(monter.left < window.innerWidth - monter.size){
-        monter.moveRight();
+    if(monter.moveRight()){
         document.getElementById('monster').innerHTML = monter.getMonterElement();
-        setTimeout(start, 2);
+        setTimeout(start, this.speed);
     }else {
-        setTimeout(lui, 22);
+        setTimeout(lui, this.speed);
     }
 }
 function lui(){
-    if(monter.left >0){
-        monter.moveleft();
+    if(monter.moveLeft()){
         document.getElementById('monster').innerHTML = monter.getMonterElement();
-        setTimeout(lui, 2)
+        setTimeout(lui, this.speed)
     }else {
-        setTimeout(start, 2);
+        setTimeout(start, this.speed);
     }
 }
 start();
