@@ -1,7 +1,7 @@
 function Ninja(top, left){
     this.top = top;
     this.left = left;
-    this.speed = 20;
+    this.speed = 50;
 
     this.moveDown = function() {
         var sum = this.top + this.speed;
@@ -45,3 +45,51 @@ function moveNinja(event) {
     }
     showNinja();
 }
+
+
+function Monter(image, top, left, size){
+    this.image = image;
+    this.top = top;
+    this.left = left;
+    this.size = size;
+
+
+    this.getMonterElement= function(){
+        return '<img width="'+ this.size + '"' +
+            ' height="'+ this.size + '"' +
+            ' src="' + this.image +'"' +
+            ' style="top: '+this.top+'px; left:'+this.left+'px;position:absolute;" />';
+    }
+
+    this.moveRight = function(){
+        this.left += 20;
+        console.log(this.top +'ok: ' + this.left);
+    }
+    this.moveleft = function(){
+        this.left -= 20;
+        console.log(this.top +'ok: ' + this.left);
+    }
+
+}
+
+var monter = new Monter('Anh/MonsterShooter2-icon.png', 600, 0, 200);
+
+function start(){
+    if(monter.left < window.innerWidth - monter.size){
+        monter.moveRight();
+        document.getElementById('monster').innerHTML = monter.getMonterElement();
+        setTimeout(start, 2);
+    }else {
+        setTimeout(lui, 22);
+    }
+}
+function lui(){
+    if(monter.left >0){
+        monter.moveleft();
+        document.getElementById('monster').innerHTML = monter.getMonterElement();
+        setTimeout(lui, 2)
+    }else {
+        setTimeout(start, 2);
+    }
+}
+start();
