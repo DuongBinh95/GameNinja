@@ -1,0 +1,15 @@
+.gameboard{
+    width: 2000px;
+    height: 1300px;
+    border: 1px solid darkgray;
+    position: relative;
+    margin-top: 300px;
+    margin-left: 500px;
+}
+#ninja{
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
